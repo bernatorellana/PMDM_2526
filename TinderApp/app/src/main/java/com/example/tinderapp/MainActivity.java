@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void showPersonaActual() {
         Person actual = Person.getPersones().get(indexActual);
-        binding = null;
+
         binding.edtNom.setText(actual.getNom());
         binding.edtDNI.setText(actual.getNIF());
         binding.spnProvincia.setSelection(actual.getProv().getCodi()-1);
