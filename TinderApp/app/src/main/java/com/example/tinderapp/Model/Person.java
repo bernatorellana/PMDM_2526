@@ -19,12 +19,11 @@ public class Person {
 
     private static List<Person> _persons;
 
-    private static List<Person> getPersones(){
+    public static List<Person> getPersones(){
         if(_persons==null) {
             _persons = new ArrayList<>();
             _persons.add(new Person(1, R.drawable.homer, "Homer", "12345678A", Sexe.HOME, Provincia.getProvincies().get(0)));
             _persons.add(new Person(2, R.drawable.left, "Margie", "12345678A", Sexe.DONA, Provincia.getProvincies().get(1)));
-
         }
         return _persons;
     }

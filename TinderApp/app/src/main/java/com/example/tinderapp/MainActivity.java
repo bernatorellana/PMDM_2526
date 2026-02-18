@@ -1,6 +1,7 @@
 package com.example.tinderapp;
 
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,17 +9,58 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.tinderapp.Model.Person;
+import com.example.tinderapp.Model.Provincia;
+import com.example.tinderapp.databinding.ActivityMainBinding;
+
 public class MainActivity extends AppCompatActivity {
+
+
+    private ActivityMainBinding binding;
+
+    private int indexActual;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        indexActual=0;
+
+        carregaSpinner();
+
+
+        showPersonaActual();
     }
-}
+
+    private void carregaSpinner() {
+
+        binding.spnProvincia.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, Provincia.getProvincies()));
+
+    }
+
+    private void showPersonaActual() {
+        Person actual = Person.getPersones().get(indexActual);
+        binding = null;
+        binding.edtNom.setText(actual.getNom());
+        binding.edtDNI.setText(actual.getNIF());
+        binding.spnProvincia.setSelection(actual.getProv().getCodi()-1);
+        binding.imgFoto.setImageResource(actual.getImatgeResource());
+        switch (actual.getSexe()){
+            case DONA:
+                binding.rbtDona.setChecked(true);
+                break;
+            case HOME:
+                binding.rbtHome.setChecked(true);
+                break;
+            case N_C:
+                binding.rbtNC.setChecked(true);
+                break;
+        }
+    }
+
+
+
+    }

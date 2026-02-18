@@ -17,6 +17,7 @@
         android:layout_weight="3"
         android:orientation="horizontal">
         <TextView
+            android:id="@+id/txvCodi"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
@@ -26,6 +27,7 @@
             android:textAlignment="center"
             android:text="12"/>
         <ImageView
+            android:id="@+id/imgFoto"
             android:layout_width="0dp"
             android:layout_weight="3"
             android:src="@drawable/homer"
@@ -49,6 +51,7 @@
             android:textAlignment="center"
             android:text="Nom"/>
         <EditText
+            android:id="@+id/edtNom"
             android:layout_width="0dp"
             android:layout_weight="3"
             android:layout_gravity="center"
@@ -70,6 +73,7 @@
             android:textAlignment="center"
             android:text="DNI"/>
         <EditText
+            android:id="@+id/edtDNI"
             android:layout_width="0dp"
             android:layout_weight="3"
             android:layout_gravity="center"
@@ -91,6 +95,7 @@
             android:textAlignment="center"
             android:text="Província"/>
         <Spinner
+            android:id="@+id/spnProvincia"
             android:layout_width="0dp"
             android:layout_weight="3"
             android:scaleType="centerCrop"
@@ -124,16 +129,19 @@
             android:orientation="horizontal"
             android:layout_height="wrap_content">
             <RadioButton
+                android:id="@+id/rbtDona"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Dona">
             </RadioButton>
             <RadioButton
+                android:id="@+id/rbtHome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Home">
             </RadioButton>
             <RadioButton
+                android:id="@+id/rbtNC"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="N/C">
@@ -153,6 +161,7 @@
         android:layout_weight="1"
         android:orientation="horizontal">
         <ImageView
+            android:id="@+id/btnLeft"
             android:layout_width="0dp"
             android:layout_weight="3"
             android:src="@drawable/left"
@@ -164,6 +173,7 @@
             android:layout_height="wrap_content"
 />
         <ImageView
+            android:id="@+id/btnRight"
             android:layout_width="0dp"
             android:layout_weight="3"
             android:src="@drawable/right"
