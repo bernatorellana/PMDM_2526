@@ -23,7 +23,7 @@ public class Person {
         if(_persons==null) {
             _persons = new ArrayList<>();
             _persons.add(new Person(1, R.drawable.homer, "Homer", "12345678A", Sexe.HOME, Provincia.getProvincies().get(0)));
-            _persons.add(new Person(2, R.drawable.left, "Margie", "12345678A", Sexe.DONA, Provincia.getProvincies().get(1)));
+            _persons.add(new Person(2, R.drawable.margie, "Margie", "12345678A", Sexe.DONA, Provincia.getProvincies().get(1)));
         }
         return _persons;
     }
