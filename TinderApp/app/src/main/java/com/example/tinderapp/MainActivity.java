@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        binding.rgSexe.setOnCheckedChangeListener(
+        binding.formXX.rgSexe.setOnCheckedChangeListener(
                 (group,  checkedId )->{
 
                     HashMap<Integer, Sexe> mapa= new HashMap<>(){{
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void programarSpinnerChanged() {
-        binding.spnProvincia.setOnItemSelectedListener( new AdapterView.OnItemSelectedListener() {
+        binding.formXX.spnProvincia.setOnItemSelectedListener( new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Person actual = getPersonaActual();
@@ -90,14 +90,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void programarTextChanged() {
-        binding.edtNom.addTextChangedListener(new MyTextWatcher() {
+        binding.formXX.edtNom.addTextChangedListener(new MyTextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
                 Person actual = getPersonaActual();
                 actual.setNom(s.toString());
             }
         });
-        binding.edtDNI.addTextChangedListener(new MyTextWatcher() {
+        binding.formXX.edtDNI.addTextChangedListener(new MyTextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
                 Person actual = getPersonaActual();
@@ -106,14 +106,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     private void programarBotons() {
-        binding.btnLeft.setOnClickListener(view -> {
+        binding.formXX.btnLeft.setOnClickListener(view -> {
             Log.d("TAG", "btn left: "+indexActual);
             if(indexActual>=1){
                 indexActual--;
                 showPersonaActual();
             }
       });
-        binding.btnRight.setOnClickListener(view -> {
+        binding.formXX.btnRight.setOnClickListener(view -> {
 
             Log.d("TAG", "btn right: "+indexActual);
             if(indexActual<Person.getPersones().size()-1){
@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void carregaSpinner() {
 
-        binding.spnProvincia.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, Provincia.getProvincies()));
+        binding.formXX.spnProvincia.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, Provincia.getProvincies()));
 
     }
 
@@ -136,22 +136,22 @@ public class MainActivity extends AppCompatActivity {
     private void showPersonaActual() {
         Person actual = getPersonaActual();
 
-        binding.edtNom.setText(actual.getNom());
-        binding.edtDNI.setText(actual.getNIF());
+        binding.formXX.edtNom.setText(actual.getNom());
+        binding.formXX.edtDNI.setText(actual.getNIF());
 
         Provincia p = actual.getProv();
 
-        binding.spnProvincia.setSelection(Provincia.getProvincies().indexOf(p));
+        binding.formXX.spnProvincia.setSelection(Provincia.getProvincies().indexOf(p));
         binding.imgFoto.setImageResource(actual.getImatgeResource());
         switch (actual.getSexe()){
             case DONA:
-                binding.rbtDona.setChecked(true);
+                binding.formXX.rbtDona.setChecked(true);
                 break;
             case HOME:
-                binding.rbtHome.setChecked(true);
+                binding.formXX.rbtHome.setChecked(true);
                 break;
             case N_C:
-                binding.rbtNC.setChecked(true);
+                binding.formXX.rbtNC.setChecked(true);
                 break;
         }
     }
