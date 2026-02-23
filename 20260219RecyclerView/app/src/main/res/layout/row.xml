@@ -9,7 +9,7 @@
 
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/llyCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/background"
@@ -41,9 +41,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="GIANT"
+                android:textFontWeight="800"
                 android:textAlignment="center" />
 
             <TextView
+                android:textColor="#000000"
                 android:id="@+id/txvDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -55,14 +57,15 @@
 
 
     <TextView
+        android:id="@+id/txvElixirCost"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:text="5"
         android:textSize="30dp"
         android:gravity="center"
         android:textAlignment="center"
-        android:background="@drawable/background_rodo" ac
-        app:layout_constraintStart_toStartOf="@+id/linearLayout"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout" />
+        android:background="@drawable/background_rodo"
+        app:layout_constraintStart_toStartOf="@+id/llyCard"
+        app:layout_constraintTop_toTopOf="@+id/llyCard" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
