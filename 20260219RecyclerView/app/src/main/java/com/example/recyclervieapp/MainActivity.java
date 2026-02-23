@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
         //Creem l'adapter
-        CardAdapter adapter = new CardAdapter();
+        CardAdapter adapter = new CardAdapter(this);
         //Afegim l'adapter al recycler
         recyclerView.setAdapter(adapter);
 

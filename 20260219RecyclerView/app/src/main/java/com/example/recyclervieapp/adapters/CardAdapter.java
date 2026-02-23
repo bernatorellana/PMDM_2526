@@ -1,5 +1,8 @@
 package com.example.recyclervieapp.adapters;
 
+import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -11,12 +14,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.recyclervieapp.R;
 import com.example.recyclervieapp.model.Card;
+import com.example.recyclervieapp.model.Rarity;
 
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
+
+    private Context context;
+
+    public CardAdapter(Context c){
+        context = c;
+    }
+
     @NonNull
     @Override
     public CardAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view =  parent.inflate(parent.getContext(), R.layout.row, null);
+        View view = parent.inflate(parent.getContext(), R.layout.row, null);
         return new ViewHolder(view);
     }
 
@@ -26,8 +37,22 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         holder.imvImag.setImageResource(current.getDrawable());
         holder.txvName.setText(current.getName());
         holder.txvDesc.setText(current.getDesc());
-        holder.txvElixirCost.setText(""+current.getElixirCost());
-        
+        holder.txvElixirCost.setText("" + current.getElixirCost());
+        Rarity r = current.getRarity();
+        int color = Color.WHITE;
+        switch (r) {
+            case EPIC:
+                color = context.getColor(R.color.epic);
+                break;
+            case RARE:
+                color = context.getColor(R.color.rare);
+                break;
+            case COMMON:
+                color = context.getColor(R.color.common);
+                break;
+        }
+        ColorStateList csl = ColorStateList.valueOf(color);
+        holder.llyCard.setBackgroundTintList(csl);
     }
 
     @Override

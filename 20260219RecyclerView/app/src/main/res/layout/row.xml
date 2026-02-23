@@ -7,13 +7,25 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
       >
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/background"
+        app:layout_constraintBottom_toBottomOf="@id/llyCard"
+        app:layout_constraintStart_toStartOf="@+id/llyCard"
+        app:layout_constraintTop_toTopOf="@+id/llyCard"
+        app:layout_constraintEnd_toEndOf="@+id/llyCard"
+        >
+
+    </ImageView>
 
     <LinearLayout
         android:id="@+id/llyCard"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/background"
-        android:backgroundTint="#BCE1E1E1"
+        android:layout_height="130dp"
+        android:background="#33F5F5F5"
+        android:backgroundTint="#3AE24B4B"
         android:backgroundTintMode="add"
         android:orientation="horizontal"
         android:padding="10dp"
@@ -24,14 +36,15 @@
 
         <ImageView
             android:id="@+id/imvImag"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:src="@drawable/giant" />
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:orientation="vertical"
             android:padding="10dp">
 
@@ -41,6 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="GIANT"
+                android:textColor="@color/black"
                 android:textFontWeight="800"
                 android:textAlignment="center" />
 
@@ -60,6 +74,7 @@
         android:id="@+id/txvElixirCost"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:layout_margin="5dp"
         android:text="5"
         android:textSize="30dp"
         android:gravity="center"

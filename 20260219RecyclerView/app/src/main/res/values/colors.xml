@@ -2,4 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="epic">#51E8A6FF</color>
+    <color name="rare">#50F06B5F</color>
+    <color name="common">#51BAD1EE</color>
 </resources>
