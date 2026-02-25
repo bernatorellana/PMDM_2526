@@ -1,12 +1,15 @@
 package com.example.recyclervieapp;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toolbar;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -21,6 +24,11 @@ import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends AppCompatActivity implements CardAdapter.OnCardClicked {
 
+    private static final int NO_SELECCIONADA =-1 ;
+    private int indexCartaSelecionada = NO_SELECCIONADA;
+
+    private CardAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,24 +40,57 @@ public class MainActivity extends AppCompatActivity implements CardAdapter.OnCar
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
         //Creem l'adapter
-        CardAdapter adapter = new CardAdapter(this, this);
+        adapter = new CardAdapter(this, this);
         //Afegim l'adapter al recycler
         recyclerView.setAdapter(adapter);
 
-    }
-
-    public void onCardClicked(Card c){
-
+        // connectar la ToolBar barMenu
+        androidx.appcompat.widget.Toolbar t = findViewById(R.id.barMenu);
+        this.setSupportActionBar(t);
     }
 
 
     @Override
     public void onCardClicked(Card c, int position) {
+        indexCartaSelecionada = position;
         Snackbar.make(this.findViewById(android.R.id.content), "HOLA "+ c.getName(), Snackbar.LENGTH_LONG).show();
     }
 
     @Override
     public void onCardLongClicked(Card c, int position) {
 
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId()== R.id.itmDelete) {
+            if(indexCartaSelecionada!=NO_SELECCIONADA) {
+                Card.getCartes().remove(indexCartaSelecionada);
+                adapter.notifyItemRemoved(indexCartaSelecionada);
+                //adapter.notifyDataSetChanged();
+                indexCartaSelecionada=NO_SELECCIONADA;
+            }
+        } else if(item.getItemId()==R.id.itmDown){
+
+            Log.d("XXX",indexCartaSelecionada+";"+Card.getCartes().size() );
+            if(indexCartaSelecionada!=NO_SELECCIONADA
+                && indexCartaSelecionada<Card.getCartes().size()-1
+            ) {
+                Card esborrada = Card.getCartes().remove(indexCartaSelecionada);
+                Card.getCartes().add(indexCartaSelecionada+1,esborrada);
+                adapter.setSeleccionat(indexCartaSelecionada+1);
+                indexCartaSelecionada=indexCartaSelecionada+1;
+                adapter.notifyDataSetChanged();
+            }
+        }
+        return true;
     }
 }

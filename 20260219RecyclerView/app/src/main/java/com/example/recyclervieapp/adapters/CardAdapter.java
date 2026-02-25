@@ -22,6 +22,10 @@ import com.google.android.material.snackbar.Snackbar;
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
 
 
+    public void setSeleccionat(int i) {
+        this.selectedIndex = i;
+    }
+
     public interface OnCardClicked{
         void onCardClicked(Card c, int position);
         void onCardLongClicked(Card c, int position);
