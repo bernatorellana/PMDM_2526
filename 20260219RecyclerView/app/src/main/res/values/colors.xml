@@ -5,4 +5,6 @@
     <color name="epic">#51E8A6FF</color>
     <color name="rare">#50F06B5F</color>
     <color name="common">#51BAD1EE</color>
+    <color name="selected_row">#ffffff00</color>
+    <color name="non_selected_row">#33F5F5F5</color>
 </resources>
