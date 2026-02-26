@@ -71,25 +71,13 @@ public class MainActivity extends AppCompatActivity implements CardAdapter.OnCar
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId()== R.id.itmDelete) {
-            if(indexCartaSelecionada!=NO_SELECCIONADA) {
-                Card.getCartes().remove(indexCartaSelecionada);
-                adapter.notifyItemRemoved(indexCartaSelecionada);
-                //adapter.notifyDataSetChanged();
-                indexCartaSelecionada=NO_SELECCIONADA;
-            }
-        } else if(item.getItemId()==R.id.itmDown){
 
-            Log.d("XXX",indexCartaSelecionada+";"+Card.getCartes().size() );
-            if(indexCartaSelecionada!=NO_SELECCIONADA
-                && indexCartaSelecionada<Card.getCartes().size()-1
-            ) {
-                Card esborrada = Card.getCartes().remove(indexCartaSelecionada);
-                Card.getCartes().add(indexCartaSelecionada+1,esborrada);
-                adapter.setSeleccionat(indexCartaSelecionada+1);
-                indexCartaSelecionada=indexCartaSelecionada+1;
-                adapter.notifyDataSetChanged();
-            }
+        if (item.getItemId()== R.id.itmDelete) {
+            adapter.removeItemSelected();
+        } else if(item.getItemId()==R.id.itmDown){
+           adapter.moveItemDown();
+        } else if(item.getItemId()==R.id.itmUp){
+            adapter.moveItemUp();
         }
         return true;
     }

@@ -26,6 +26,35 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         this.selectedIndex = i;
     }
 
+    public void removeItemSelected() {
+        if(selectedIndex!=NOTHING_SELECTED) {
+            Card.getCartes().remove(selectedIndex);
+            notifyItemRemoved(selectedIndex);
+            selectedIndex = NOTHING_SELECTED;
+        }
+    }
+
+    public void moveItemDown() {
+        if(selectedIndex!=NOTHING_SELECTED && selectedIndex<Card.getCartes().size()-1) {
+            Card c = Card.getCartes().remove(selectedIndex);
+            Card.getCartes().add(selectedIndex+1, c);
+            selectedIndex ++;
+            notifyItemChanged(selectedIndex);
+            notifyItemChanged(selectedIndex-1);
+            //notifyItemMoved(selectedIndex, selectedIndex+1);
+        }
+    }
+
+    public void moveItemUp() {
+        if(selectedIndex!=NOTHING_SELECTED && selectedIndex>0) {
+            Card c = Card.getCartes().remove(selectedIndex-1);
+            Card.getCartes().add(selectedIndex, c);
+            selectedIndex --;
+            notifyItemChanged(selectedIndex);
+            notifyItemChanged(selectedIndex+1);
+        }
+    }
+
     public interface OnCardClicked{
         void onCardClicked(Card c, int position);
         void onCardLongClicked(Card c, int position);
