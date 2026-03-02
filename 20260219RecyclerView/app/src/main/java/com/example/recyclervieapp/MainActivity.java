@@ -19,15 +19,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.recyclervieapp.adapters.CardAdapter;
+import com.example.recyclervieapp.adapters.MagicCardAdapter;
 import com.example.recyclervieapp.model.Card;
+import com.example.recyclervieapp.model.magic.MagicCard;
 import com.google.android.material.snackbar.Snackbar;
 
-public class MainActivity extends AppCompatActivity implements CardAdapter.OnCardClicked {
+public class MainActivity extends AppCompatActivity implements CardAdapter.OnCardClicked, MagicCardAdapter.OnCardClicked {
 
     private static final int NO_SELECCIONADA =-1 ;
     private int indexCartaSelecionada = NO_SELECCIONADA;
 
-    private CardAdapter adapter;
+    private MagicCardAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +42,8 @@ public class MainActivity extends AppCompatActivity implements CardAdapter.OnCar
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
         //Creem l'adapter
-        adapter = new CardAdapter(this, this);
+        adapter = new MagicCardAdapter(this, this);
+
         //Afegim l'adapter al recycler
         recyclerView.setAdapter(adapter);
 
@@ -80,5 +83,15 @@ public class MainActivity extends AppCompatActivity implements CardAdapter.OnCar
             adapter.moveItemUp();
         }
         return true;
+    }
+
+    @Override
+    public void onCardClicked(MagicCard c, int position) {
+
+    }
+
+    @Override
+    public void onCardLongClicked(MagicCard c, int position) {
+
     }
 }

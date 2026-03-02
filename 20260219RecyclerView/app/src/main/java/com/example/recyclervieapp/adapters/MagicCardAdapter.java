@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,10 +16,11 @@ import com.bumptech.glide.Glide;
 import com.example.recyclervieapp.R;
 import com.example.recyclervieapp.model.Card;
 import com.example.recyclervieapp.model.Rarity;
-import com.google.android.material.snackbar.Snackbar;
+import com.example.recyclervieapp.model.magic.MagicCard;
+import com.example.recyclervieapp.parser.MagicJSONParser;
 
 
-public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
+public class MagicCardAdapter extends RecyclerView.Adapter<MagicCardAdapter.ViewHolder> {
 
 
     public void setSeleccionat(int i) {
@@ -29,16 +29,18 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
 
     public void removeItemSelected() {
         if(selectedIndex!=NOTHING_SELECTED) {
-            Card.getCartes().remove(selectedIndex);
+            MagicJSONParser.getCards(context).remove(selectedIndex);
             notifyItemRemoved(selectedIndex);
             selectedIndex = NOTHING_SELECTED;
         }
     }
 
     public void moveItemDown() {
-        if(selectedIndex!=NOTHING_SELECTED && selectedIndex<Card.getCartes().size()-1) {
-            Card c = Card.getCartes().remove(selectedIndex);
-            Card.getCartes().add(selectedIndex+1, c);
+        if(selectedIndex!=NOTHING_SELECTED && selectedIndex<MagicJSONParser.getCards(context).size()-1) {
+
+            
+            MagicCard c = MagicJSONParser.getCards(context).remove(selectedIndex);
+            MagicJSONParser.getCards(context).add(selectedIndex+1, c);
             selectedIndex ++;
             notifyItemChanged(selectedIndex);
             notifyItemChanged(selectedIndex-1);
@@ -48,8 +50,8 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
 
     public void moveItemUp() {
         if(selectedIndex!=NOTHING_SELECTED && selectedIndex>0) {
-            Card c = Card.getCartes().remove(selectedIndex-1);
-            Card.getCartes().add(selectedIndex, c);
+            MagicCard c = MagicJSONParser.getCards(context).remove(selectedIndex-1);
+            MagicJSONParser.getCards(context).add(selectedIndex, c);
             selectedIndex --;
             notifyItemChanged(selectedIndex);
             notifyItemChanged(selectedIndex+1);
@@ -57,8 +59,8 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     }
 
     public interface OnCardClicked{
-        void onCardClicked(Card c, int position);
-        void onCardLongClicked(Card c, int position);
+        void onCardClicked(MagicCard c, int position);
+        void onCardLongClicked(MagicCard c, int position);
     }
 
     private OnCardClicked listener;
@@ -66,44 +68,29 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     private int selectedIndex = NOTHING_SELECTED;
     private Context context;
 
-    public CardAdapter(Context c, OnCardClicked listener){
+    public MagicCardAdapter(Context c, OnCardClicked listener){
         context = c;
         this.listener = listener;
     }
 
     @NonNull
     @Override
-    public CardAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MagicCardAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = parent.inflate(parent.getContext(), R.layout.row, null);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CardAdapter.ViewHolder holder, int position) {
-        Card current = Card.getCartes().get(position);
+    public void onBindViewHolder(@NonNull MagicCardAdapter.ViewHolder holder, int position) {
+        MagicCard current = MagicJSONParser.getCards(context).get(position);
         //holder.imvImag.setImageResource(current.getDrawable());
 
-        Glide.with(context).load(current.getImageURL()).
+        Glide.with(context).load(current.getImageUrl()).
                 fallback(R.drawable.skeletons).into(holder.imvImag);
 
         holder.txvName.setText(current.getName());
-        holder.txvDesc.setText(current.getDesc());
-        holder.txvElixirCost.setText("" + current.getElixirCost());
-        Rarity r = current.getRarity();
-        int color = Color.WHITE;
-        switch (r) {
-            case EPIC:
-                color = context.getColor(R.color.epic);
-                break;
-            case RARE:
-                color = context.getColor(R.color.rare);
-                break;
-            case COMMON:
-                color = context.getColor(R.color.common);
-                break;
-        }
-        ColorStateList csl = ColorStateList.valueOf(color);
-        holder.llyCard.setBackgroundTintList(csl);
+        holder.txvDesc.setText(current.getText());
+        holder.txvElixirCost.setText("" + current.getManaCost());
 
         // Mirem si la carta està seleccionada i en aquest
         // cas canviem el background
@@ -116,7 +103,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return Card.getCartes().size();
+        return MagicJSONParser.getCards(context).size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -137,12 +124,12 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
             llyCard = itemView.findViewById(R.id.llyCard);
 
             llyCard.setOnClickListener(v ->{
-                Card card = selectCard(v);
+                MagicCard card = selectCard(v);
                 listener.onCardClicked(card, selectedIndex);
             });
 
             llyCard.setOnLongClickListener(v -> {
-                Card card = selectCard(v);
+                MagicCard card = selectCard(v);
                 listener.onCardLongClicked(card, selectedIndex);
                 return true;
             });
@@ -150,15 +137,15 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         }
 
         @NonNull
-        private Card selectCard(View v) {
+        private MagicCard selectCard(View v) {
             int oldIndex = selectedIndex;
             selectedIndex = this.getBindingAdapterPosition();
 
             if(oldIndex!=NOTHING_SELECTED) notifyItemChanged(oldIndex);
             notifyItemChanged(selectedIndex);
-            //Toast.makeText(context, "HOLA "+ Card.getCartes().get(selectedIndex).getName(),
+            //Toast.makeText(context, "HOLA "+ MagicJSONParser.getCards(context).get(selectedIndex).getName(),
             //       Toast.LENGTH_SHORT).show();
-            Card card = Card.getCartes().get(selectedIndex);
+            MagicCard card = MagicJSONParser.getCards(context).get(selectedIndex);
             return card;
         }
     }
