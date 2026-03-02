@@ -4,6 +4,8 @@ import android.content.Context;
 import android.util.Log;
 
 import com.example.recyclervieapp.model.magic.MagicCard;
+import com.example.recyclervieapp.model.magic.MagicCardCollection;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,7 +40,7 @@ public class MagicJSONParser {
                 cards = parseCards(json);
 
             } catch (Exception ex) {
-                Log.e("Exception", ex.getMessage());
+                Log.e("Exception", ex.getMessage(), ex);
                 return null;
             }
         }
@@ -46,6 +48,12 @@ public class MagicJSONParser {
     }
 
     private static List<MagicCard> parseCards(String json) throws JSONException {
+
+        Gson gson = new Gson();
+        MagicCardCollection mcc = gson.fromJson(json, MagicCardCollection.class);
+
+        Log.d("YYYY", mcc.getCards().toString());
+
 
         cards = new ArrayList<MagicCard>();
         JSONObject jsonObject = new JSONObject(json);
@@ -65,7 +73,7 @@ public class MagicJSONParser {
             MagicCard card = new MagicCard(name, manaCost, type, rarity, text, imageUrl);
             cards.add(card);
         }
-
+        Log.d("XXXX", cards.toString());
         return cards;
     }
 }

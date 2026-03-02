@@ -63,4 +63,16 @@ public class MagicCard {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
+
+    @Override
+    public String toString() {
+        return "MagicCard{" +
+                "name='" + name + '\'' +
+                ", manaCost='" + manaCost + '\'' +
+                ", type='" + type + '\'' +
+                ", rarity='" + rarity + '\'' +
+                ", text='" + text + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                '}';
+    }
 }
