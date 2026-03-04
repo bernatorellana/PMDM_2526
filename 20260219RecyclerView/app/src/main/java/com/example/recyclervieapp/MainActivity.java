@@ -53,6 +53,12 @@ public class MainActivity extends AppCompatActivity implements CardAdapter.OnCar
         this.setSupportActionBar(t);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("XXX", "On resume");
+        adapter.notifyDataSetChanged();
+    }
 
     @Override
     public void onCardClicked(Card c, int position) {
@@ -90,6 +96,7 @@ public class MainActivity extends AppCompatActivity implements CardAdapter.OnCar
     public void onCardClicked(MagicCard c, int position) {
         Intent i = new Intent(this, CardEditorActivity.class);
         i.putExtra(CardEditorActivity.PARAM_CARD, c);
+        i.putExtra(CardEditorActivity.PARAM_CARD_POSITION, position);
         startActivity(i);
     }
 
