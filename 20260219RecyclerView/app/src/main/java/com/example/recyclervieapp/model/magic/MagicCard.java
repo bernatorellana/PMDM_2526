@@ -1,6 +1,8 @@
 package com.example.recyclervieapp.model.magic;
 
-public class MagicCard {
+import java.io.Serializable;
+
+public class MagicCard implements Serializable {
     String name;
     String manaCost;
     String type;

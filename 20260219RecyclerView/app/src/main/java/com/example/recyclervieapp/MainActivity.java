@@ -1,5 +1,6 @@
 package com.example.recyclervieapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ActionMode;
@@ -87,7 +88,9 @@ public class MainActivity extends AppCompatActivity implements CardAdapter.OnCar
 
     @Override
     public void onCardClicked(MagicCard c, int position) {
-
+        Intent i = new Intent(this, CardEditorActivity.class);
+        i.putExtra(CardEditorActivity.PARAM_CARD, c);
+        startActivity(i);
     }
 
     @Override
