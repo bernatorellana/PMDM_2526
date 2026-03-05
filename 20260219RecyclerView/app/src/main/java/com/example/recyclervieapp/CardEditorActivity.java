@@ -50,8 +50,7 @@ public class CardEditorActivity extends AppCompatActivity {
             MagicCard c = cards.get(position);
             c.setName(binding.edtName.getText().toString());
             c.setText(binding.edtText.getText().toString());
-
-             finish();
+            finish();
         });
 
         //programem el click sobre la imatge per obrir un intent de càmera
