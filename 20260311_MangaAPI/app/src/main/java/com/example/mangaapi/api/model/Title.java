@@ -12,8 +12,23 @@ public class Title {
     @Expose
     private String en;
 
+    @SerializedName("ja-ro")
+    @Expose
+    private String ja_ro;
+
+
+    public String getTitle(){
+        if( en!=null) return en;
+        else  if( ja_ro!=null) return ja_ro;
+        else return "NO_TITLE";
+    }
+
     public String getEn() {
         return en;
+    }
+
+    public String getJaRo() {
+        return ja_ro;
     }
 
     public void setEn(String en) {
