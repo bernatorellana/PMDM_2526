@@ -15,6 +15,7 @@ import com.example.a20260318_room_testing.databinding.ActivityMainBinding;
 import com.example.a20260318_room_testing.db.model.Employee;
 import com.example.a20260318_room_testing.viewmodel.EmployeeViewModel;
 import com.example.a20260318_room_testing.viewmodel.UiState;
+import com.example.a20260318_room_testing.web.EmployeeJSInterface;
 
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         // observe employees
         viewModel.getEmployees().observe(this, employees -> {
-            showEmployeeList(employees, binding);
+            showEmployeeList(employees, viewModel, binding);
         });
 
         // add button click listener
@@ -86,15 +87,33 @@ public class MainActivity extends AppCompatActivity {
         viewModel.insert(new Employee(name, "Developer"));
     }
 
-    private static void showEmployeeList(List<Employee> employees, ActivityMainBinding binding) {
+    private static void showEmployeeList(List<Employee> employees, EmployeeViewModel viewModel, ActivityMainBinding binding) {
+        //activate the webview javascript
+        binding.web.getSettings().setJavaScriptEnabled(true);
+        // register EmployeeJSInterface
+        binding.web.addJavascriptInterface(new EmployeeJSInterface(viewModel), "Android");
+
+
         // update UI
         // list the employees in the webview as html
-        String html = "<html><body><ul>";
+        String html = "<html>" +
+                "<head>" +
+                "<style>" +
+                " li {" +
+                "   border-radius:10px;display:flex;justify-content:space-between;padding:10px;background-color:lightgray;margin:10px "+
+                " } \n"+
+                " li:nth-child(2n) {" +
+                "   background-color:yellow; "+
+                " } "+
+                "</style>"+
+                "<body><ul>";
+
+
         for (Employee employee : employees) {
             // add each employee to the html
-            html += "<li  style='display:flex;justify-content:space-between;padding:10px;background-color:lightgray;margin:10px'><p>" +
+            html += "<li ><p>" +
                     employee.id + ": " + employee.name +"</p> " +
-                    "<input type='button' value='DEL'  onclick='deleteEmployee(" + employee.id + ")'> </li>";
+                    "<input type='button' value='DEL'  onclick='Android.removeEmployee(" + employee.id + ");'> </li>";
         }
         html += "</ul></body></html>";
         binding.web.loadData(html, "text/html", "UTF-8");

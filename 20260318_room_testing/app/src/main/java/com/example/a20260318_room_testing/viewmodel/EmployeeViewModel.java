@@ -41,4 +41,8 @@ public class EmployeeViewModel extends AndroidViewModel {
         // repository posts updates directly to insertState
         repository.insert(employee, insertState);
     }
+
+    public void removeEmployee(int id) {
+        repository.removeEmployee(id, insertState);
+    }
 }

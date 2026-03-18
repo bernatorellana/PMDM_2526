@@ -2,6 +2,7 @@ package com.example.a20260318_room_testing.db;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
@@ -21,4 +22,7 @@ public interface EmployeeDao {
 
     @Query("SELECT * FROM employees ORDER BY name ASC")
     LiveData<List<Employee>> getAllEmployees();
+
+    @Query("DELETE FROM employees WHERE id = :id")
+    void removeEmployee(int id);
 }

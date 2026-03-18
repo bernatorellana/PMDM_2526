@@ -38,4 +38,16 @@ public class EmployeeRepository {
         return dao.getAllEmployees();
 
     }
+
+    public void removeEmployee(int id, MutableLiveData<UiState<Void>> insertState) {insertState.postValue(UiState.loading());
+
+        executor.execute(() -> {
+            try {
+                dao.removeEmployee(id);
+                insertState.postValue(UiState.success(null));
+            } catch (Exception e) {
+                insertState.postValue(UiState.error(e));
+            }
+        });
+    }
 }
