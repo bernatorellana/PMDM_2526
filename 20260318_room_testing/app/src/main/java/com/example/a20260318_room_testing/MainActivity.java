@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static void showEmployeeList(List<Employee> employees, EmployeeViewModel viewModel, ActivityMainBinding binding) {
         //activate the webview javascript
+        binding.web.getSettings().setBlockNetworkImage(false);
         binding.web.getSettings().setJavaScriptEnabled(true);
         // register EmployeeJSInterface
         binding.web.addJavascriptInterface(new EmployeeJSInterface(viewModel), "Android");
@@ -99,12 +100,19 @@ public class MainActivity extends AppCompatActivity {
         String html = "<html>" +
                 "<head>" +
                 "<style>" +
+                "body {"+
+                " background-size:cover;"+
+                " background-image:url('https://images.pexels.com/photos/18682254/pexels-photo-18682254/free-photo-of-mountain-landscape-with-forests-and-a-stream.jpeg')"+
+                "}"+
                 " li {" +
-                "   border-radius:10px;display:flex;justify-content:space-between;padding:10px;background-color:lightgray;margin:10px "+
+                "   font-size:25px;border-radius:10px;display:flex;justify-content:space-between;padding:10px;background-color:lightgray;margin:10px "+
                 " } \n"+
                 " li:nth-child(2n) {" +
-                "   background-color:yellow; "+
+                "   background-color:rgb(120,100,100); color:white; "+
                 " } "+
+                " input {" +
+                "   font-size:20px; color:black; border-radius:5px;"+
+                " } \n"+
                 "</style>"+
                 "<body><ul>";
 
@@ -113,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
             // add each employee to the html
             html += "<li ><p>" +
                     employee.id + ": " + employee.name +"</p> " +
-                    "<input type='button' value='DEL'  onclick='Android.removeEmployee(" + employee.id + ");'> </li>";
+                    "<input type='button' value='\uD83D\uDDD1'  onclick='Android.removeEmployee(" + employee.id + ");'> </li>";
         }
         html += "</ul></body></html>";
         binding.web.loadData(html, "text/html", "UTF-8");
