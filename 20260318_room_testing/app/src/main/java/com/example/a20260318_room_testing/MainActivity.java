@@ -92,7 +92,9 @@ public class MainActivity extends AppCompatActivity {
         String html = "<html><body><ul>";
         for (Employee employee : employees) {
             // add each employee to the html
-            html += "<li>" + employee.id + ": " + employee.name + "  </li>";
+            html += "<li  style='display:flex;justify-content:space-between;padding:10px;background-color:lightgray;margin:10px'><p>" +
+                    employee.id + ": " + employee.name +"</p> " +
+                    "<input type='button' value='DEL'  onclick='deleteEmployee(" + employee.id + ")'> </li>";
         }
         html += "</ul></body></html>";
         binding.web.loadData(html, "text/html", "UTF-8");

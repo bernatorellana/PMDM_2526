@@ -16,6 +16,7 @@ public class EmployeeRepository {
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
 
     public EmployeeRepository(EmployeeDao dao) {
+
         this.dao = dao;
     }
 
@@ -24,11 +25,6 @@ public class EmployeeRepository {
 
         executor.execute(() -> {
             try {
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
                 dao.insert(employee);
                 insertState.postValue(UiState.success(null));
             } catch (Exception e) {
