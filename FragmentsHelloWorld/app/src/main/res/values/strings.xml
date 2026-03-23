@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">FragmentsHelloWorld</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="fragment_title_1">Introduir Alçada</string>
+    <string name="alcada_hint_1">Alçada en cm</string>
+    <string name="introduir_pes">Introduir pes</string>
+    <string name="pes_hint">Pes en Kg</string>
+    <string name="resultat">El te IMC és:</string>
+</resources>
