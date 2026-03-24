@@ -23,5 +23,10 @@
         android:hint="@string/alcada_hint_1"
         android:inputType="number"
         ></EditText>
-
+    <Button
+        android:id="@+id/btnNext"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next"></Button>
 </LinearLayout>

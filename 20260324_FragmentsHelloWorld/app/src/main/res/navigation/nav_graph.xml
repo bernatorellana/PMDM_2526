@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/alcadaFragment">
+
+    <fragment
+        android:id="@+id/alcadaFragment"
+        android:name="com.example.fragmentshelloworld.view.AlcadaFragment"
+        android:label="fragment_alcada"
+        tools:layout="@layout/fragment_alcada" >
+        <action
+            android:id="@+id/action_alcadaFragment_to_pesFragment"
+            app:destination="@id/pesFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/pesFragment"
+        android:name="com.example.fragmentshelloworld.view.PesFragment"
+        android:label="fragment_pes"
+        tools:layout="@layout/fragment_pes" >
+        <action
+            android:id="@+id/action_pesFragment_to_resultatFragment"
+            app:destination="@id/resultatFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/resultatFragment"
+        android:name="com.example.fragmentshelloworld.view.ResultatFragment"
+        android:label="fragment_resultat"
+        tools:layout="@layout/fragment_resultat" />
+</navigation>

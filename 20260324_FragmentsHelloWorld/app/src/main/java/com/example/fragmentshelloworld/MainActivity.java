@@ -30,12 +30,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Posar el fragment HomeFragment en el fragmentContainerView
-        if(savedInstanceState==null) {
+        /*if(savedInstanceState==null) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragmentContainerView, new AlcadaFragment()).commit();
-        }
+        }*/
 
-        Button btnNext = findViewById(R.id.btnNext);
+        /*Button btnNext = findViewById(R.id.btnNext);
         btnNext.setOnClickListener( view ->{
             // Check whether the current fragment is AlcadaFragment
             String className = getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView).getClass().getSimpleName();
@@ -57,6 +57,6 @@ public class MainActivity extends AppCompatActivity {
                         addToBackStack("seleccioAlcada").
                         commit();
             }
-        });
+        });*/
     }
 }

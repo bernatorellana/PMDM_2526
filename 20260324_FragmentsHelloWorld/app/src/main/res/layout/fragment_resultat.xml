@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.AlcadaFragment"
+    tools:context=".view.ResultatFragment"
     android:orientation="vertical"
     android:padding="30dp"
     android:background="#E5F4E5">

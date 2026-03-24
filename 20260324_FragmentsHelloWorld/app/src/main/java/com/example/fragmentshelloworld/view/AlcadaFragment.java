@@ -1,5 +1,7 @@
 package com.example.fragmentshelloworld.view;
 
+import static androidx.navigation.fragment.FragmentKt.findNavController;
+
 import android.content.Context;
 import android.os.Bundle;
 
@@ -12,6 +14,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.fragmentshelloworld.R;
@@ -53,6 +56,12 @@ public class AlcadaFragment extends Fragment {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) { }
+        });
+
+
+        Button btnNext = v.findViewById(R.id.btnNext);
+        btnNext.setOnClickListener( view ->{
+            findNavController(this).navigate(R.id.action_alcadaFragment_to_pesFragment);
         });
 
         return v;
